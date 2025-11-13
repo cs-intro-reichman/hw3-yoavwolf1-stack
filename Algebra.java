@@ -25,43 +25,102 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int res = x1;
+		//positive second number
+		if(x2 >= 0)
+			for(int i = 1; i <= x2; i++)
+				res++;
+		//negative second number
+		else
+			for(int i = -1; i >= x2; i--)
+				res--;
+
+		return res;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int res = x1;
+		//positive second number
+		if(x2 >= 0)
+			for(int i = 1; i <= x2; i++)
+				res--;
+		//negative second number
+		else
+			for(int i = -1; i >= x2; i--)
+				res++;
+
+		return res;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int res = 0;
+		//positive second number
+		if(x2 >= 0)
+			for(int i = 1; i <= x2; i++)
+				res = plus(res,x1);
+		//negative second number
+		else
+			for(int i = -1; i >= x2; i--)
+				res = minus(res,x1);
+
+		return res;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int res = 1;
+		for(int i = 1; i <= n; i++)
+			res = times(res,x);
+
+		return res;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int posX1 = x1;
+		int posX2 = x2;
+		int count = 0;
+		//flipping the sign of res if the first number is negative
+		if(x1 < 0) 
+			posX1 = minus(0,x1);
+		//flipping the sign of posX2 if the second number is negative
+		if(x2 < 0) 
+			posX2 = minus(0,x2);
+		//incrementing the divisor from the dividend until we can't anymore
+		while(posX1 >= posX2) {
+			posX1 = minus(posX1,posX2);
+			count++;
+		}
+
+		//negative first XOR second number = negative result
+		if((x1 < 0) ^ (x2 < 0))
+			return minus(0,count);
+		//both numbers positive or both negative = positive result
+		else return count;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int res = x1;
+		while(res >= x2)
+			res = minus(res,x2);
+		
+		return res;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
+		if(x < 0) return -1;
+		int squared;
+		for(int i = 1; i <= x; i++) {
+			squared = pow(i,2);
+			if(squared > x)
+				return --i;
+			if(squared == x)
+				return i;
+		}
 		return 0;
 	}	  	  
 }
