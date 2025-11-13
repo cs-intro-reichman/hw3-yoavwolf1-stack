@@ -29,8 +29,8 @@ public class Anagram {
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		//"cleaning" the two input strings
-		String word1 = preProcess(str1);
-		String word2 = preProcess(str2);
+		String word1 = preProcessSpaces(str1);
+		String word2 = preProcessSpaces(str2);
 
 		String firstPart = "";
 		String lastPart = "";
@@ -61,6 +61,22 @@ public class Anagram {
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
+		String input = str.toLowerCase();
+		String clean = "";
+		char curr;
+		String abc = "abcdefghijklmnopqrstuvwxyz ";
+		
+		//going over the input word and copying only the ABC characters into a new string
+		for(int i = 0; i < input.length(); i++) {
+			curr = input.charAt(i);
+			//checking if that character is a letter, and if so - adding it to the filtered word
+			if(abc.indexOf(curr) != -1) clean += curr;
+		}
+		return clean;
+	}
+
+	//same method - but deleting the spaces (to be used only in "isAnagram")
+	public static String preProcessSpaces(String str) {
 		String input = str.toLowerCase();
 		String clean = "";
 		char curr;
